@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <nav class="d-flex justify-content-between align-items-center col-10 col-4 p-4 bg-dark text-light">
+        <h2 class="text-center">Howdy {{users.first_name}}!</h2>
+        <div class="d-flex col-3 justify-content-around">
+            <a href="/dashboard" >Dashbaord</a>
+            <a href="/logout" >Logout</a>
+
+        </div>
+
+    </nav>
+    <form action="/create/camp" method="post" >
+        <h5 class="text-center col-10 col-4 p-4 bg-info text-white">ALL CAMP SITES</h5>
+        <table class="text-center col-10 col-4 p-4 bg-warning text-white">
+            <thead>
+                <tr>
+                    <th>Camp Name</th>
+                    <th>Location</th>
+                    <th>Comment</th>
+                    <th>Date that works for you</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for camp in camps %}
+                    <tr>
+                        <td>{{camp.camp_name}}</td>
+                        <td>{{camp.location}}</td>
+                        <td>{{camp.description}}</td>
+                        <td>{{camp.camping_date}}</td>
+                        <td>
+                            <a href="/camp/{{camp.id}}">View Detail</a>
+                            {% if camp.user_id == session.user_id %}
+                            <a href="/edit/camp/{{camp.id}}">Edit</a>
+                            <a href="/destroy/camp/{{camp.id}}">Delete</a>
+
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    
+    <div class="d-flex col-2 justify-content-around">
+        <a href="/new/camp">Add New Camp</a>
+        <a href="/logout" >Logout</a>
+
+    </div>
+</body>
+</html>

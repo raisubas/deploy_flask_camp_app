@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Show</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <nav class="d-flex justify-content-between align-items-center col-10 col-4 p-4 bg-dark text-light">
+        <h2 class="text-center">Welcome {{user.first_name}}!</h2>
+        <div class="d-flex col-3 justify-content-around">
+            <a href="/dashboard" >Camp list</a>
+            <a href="/logout" >Logout</a>
+
+        </div>
+
+    </nav>
+    <form action="/create/camp" method="post" >
+        <h5 class="col-10 col-4 p-4 bg-info text-white">Add a New Camp Site</h5>
+        {% with messages = get_flashed_messages(category_filter=['camp']) %}
+            {% if messages %}
+            <div style='color:red'>
+                <strong>Hello</strong>
+                    {% for message in messages %}
+                    <p>{{message}}</p>
+                    {% endfor %}
+            </div>
+            {% endif %}
+        {% endwith %}
+        
+        <div class="d-flex justify-content-between col-9">
+            <div class="col-4">
+                <div class="form-group col-10 col-4 p-4 bg-info text-white">
+                    <label for="camp_name">Camp Name:</label>
+                    <input type="text" name="camp_name" class="form-control">
+                    <label for="camp_name">Location:</label>
+                    <input type="text" name="location" class="form-control">
+                    <label for="description">Description:</label>
+                    <textarea name="description"  cols="25" rows="5" class="form-control"></textarea>
+                </div>
+            </div>
+            <div class="col-4">
+
+                <div class="form-group col-10 col-4 p-4 bg-info text-white">
+                    <label for="camping_date">Camping Date:</label>
+                    <input type="date" name="camping_date" class="form-control">
+                </div>
+                <input class="btn btn-primary" type="submit" value="Add" >
+            </div>
+        </div>
+    </form>
+</body>
+</html>
+
